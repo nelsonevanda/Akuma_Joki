@@ -1,0 +1,51 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Akuma Joki</title>
+<style>
+body{margin:0;font-family:Arial;background:#12051f;color:#fff}
+header{padding:40px;text-align:center;background:linear-gradient(135deg,#5d1bb3,#8d4cff)}
+.stats{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;padding:20px}
+.card,.box{background:#22113a;padding:20px;border-radius:12px;min-width:180px}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;padding:20px}
+button{background:#7c3aed;color:#fff;border:none;padding:10px 18px;border-radius:8px;cursor:pointer}
+select{width:100%;padding:8px;margin:8px 0}
+#price{font-weight:bold}
+</style></head><body>
+<header><h1>AKUMA JOKI</h1><p>Jasa Joki Terpercaya</p></header>
+<div class='stats'>
+<div class='card'><h2>1.582+</h2><p>Total Order</p></div>
+<div class='card'><h2>99.8%</h2><p>Tingkat Keberhasilan</p></div>
+<div class='card'><h2>4.9⭐</h2><p>Rating</p></div>
+</div>
+<div class='games'>
+<div class='box'>
+<h3>Pilih Game</h3>
+<select id='game'>
+<option>Blox Fruits</option><option>Expedition Antarctica</option><option>Retail Tycoon 2</option>
+</select>
+<select id='service'></select>
+<p>Harga: <span id='price'></span></p>
+<button onclick='order()'>Pesan via WhatsApp</button>
+</div></div>
+<script>
+const wa='6281234567890';
+const data={
+'Blox Fruits':{'Joki Level 100':'Rp2.000','Joki Level 200':'Rp4.000','CDK':'Rp20.000','Bantu V2 Buah':'Rp10.000'},
+'Expedition Antarctica':{'Semua Misi NPC':'Rp25.000','Farm Money':'Rp10.000'},
+'Retail Tycoon 2':{'Bangun Toko':'Rp15.000','Farm Cash':'Rp10.000'}
+};
+const g=document.getElementById('game'),s=document.getElementById('service'),p=document.getElementById('price');
+function load(){s.innerHTML='';Object.entries(data[g.value]).forEach(([k,v])=>{let o=document.createElement('option');o.text=k;o.value=k;s.add(o)});p.textContent=data[g.value][s.value]}
+g.onchange=load;s.onchange=()=>p.textContent=data[g.value][s.value];load();
+function order(){
+let txt=`Bang saya mau joki game ${g.value}.
+
+List jokian yang saya order
+
+USN :
+PW :
+
+Jokian : ${s.value}
+Harga : ${data[g.value][s.value]}`;
+window.open('https://wa.me/'+wa+'?text='+encodeURIComponent(txt),'_blank');
+}
+</script></body></html>
