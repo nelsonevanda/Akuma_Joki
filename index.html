@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AKUMA JOKI</title>
+
+<style>
+html, body{
+width:100%;
+height:100%;
+margin:0;
+padding:0;
+overflow-x:hidden;
+background:linear-gradient(180deg,#12001f,#2b0c55,#0d0018);
+background-attachment:fixed;
+color:white;
+font-family:Arial;
+}
+
+#home{
+text-align:center;
+padding:0 20px;
+min-height:100vh;
+width:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+button{
+padding:12px 20px;
+margin-top:20px;
+border:none;
+border-radius:10px;
+background:#8c52ff;
+color:white;
+cursor:pointer;
+}
+
+.logo-wrap{
+width:240px;
+margin:0 auto;
+position:relative;
+height:120px;
+}
+
+.akuma{
+position:absolute;
+left:0;
+top:28px;
+font-size:46px;
+font-weight:900;
+color:white;
+text-shadow:0 0 15px #8c52ff,0 0 35px #8c52ff;
+animation:akumaFall 1s ease forwards;
+}
+
+.joki{
+position:absolute;
+right:0;
+bottom:0;
+font-size:34px;
+color:#a855f7;
+font-weight:800;
+text-shadow:0 0 10px #a855f7;
+}
+
+@keyframes akumaFall{
+0%{transform:translateY(-120px);opacity:0;}
+70%{transform:translateY(10px);opacity:1;}
+100%{transform:translateY(0);opacity:1;}
+}
+
+#menu{
+display:none;
+padding:20px;
+min-height:100vh;
+width:100%;
+}
+
+.stats{
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+padding:10px;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+border:1px solid #8c52ff;
+padding:10px;
+border-radius:12px;
+width:140px;
+text-align:center;
+}
+
+.menu{
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+padding:10px;
+}
+
+.tab{
+padding:10px 14px;
+background:rgba(255,255,255,0.05);
+border:1px solid #8c52ff;
+border-radius:12px;
+cursor:pointer;
+}
+
+.active{
+background:white;
+color:#2b0c55;
+font-weight:bold;
+}
+
+.box{
+display:none;
+background:rgba(30,15,51,0.85);
+border:1px solid #8c52ff;
+padding:15px;
+border-radius:15px;
+margin:15px auto;
+max-width:720px;
+}
+
+.show{display:block;}
+
+.item{
+display:flex;
+justify-content:space-between;
+padding:10px;
+border-bottom:1px solid rgba(255,255,255,0.08);
+cursor:pointer;
+}
+
+.item:hover{
+background:white;
+color:#2b0c55;
+}
+
+h3{
+color:#d8c8ff;
+border-left:3px solid #8c52ff;
+padding-left:8px;
+}
+
+.req-box{
+margin-top:15px;
+padding:12px;
+border:1px solid #ffcc00;
+background:rgba(255, 200, 0, 0.08);
+border-radius:12px;
+color:#fff3b0;
+text-align:center;
+}
+</style>
+
+<script>
+
+/* 🔥 ORDER LOCAL (AMAN + TIDAK ERROR) */
+let orderCount = 0;
+
+function updateUI(){
+document.querySelectorAll(".card")[0].innerHTML =
+"<b>Order</b><br>" + orderCount;
+}
+
+function openMenu(){
+document.getElementById("home").style.display="none";
+document.getElementById("menu").style.display="block";
+}
+
+function openTab(tab, el){
+document.querySelectorAll(".box").forEach(b=>{
+b.classList.remove("show");
+});
+
+document.getElementById(tab).classList.add("show");
+
+document.querySelectorAll(".tab").forEach(t=>{
+t.classList.remove("active");
+});
+
+el.classList.add("active");
+}
+
+function order(nama, harga){
+
+orderCount++;
+updateUI();
+
+/* WA HARUS PASTI JALAN */
+setTimeout(()=>{
+let nomor = "6282131561301";
+
+let text =
+"HI bang, aku mau joki ni.\n\n" +
+"Joki: " + nama + " - " + harga + "\n" +
+"Usn:\n" +
+"Pw:\n\n" +
+"Makasih bang";
+
+let url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(text);
+window.open(url, "_blank");
+}, 50);
+
+}
+
+function backLobby(){
+document.getElementById("menu").style.display="none";
+
+let home = document.getElementById("home");
+home.style.display="flex";
+
+let akuma = document.querySelector(".akuma");
+akuma.style.animation="none";
+akuma.offsetHeight;
+akuma.style.animation="akumaFall 1s ease forwards";
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div id="home">
+
+<div class="logo-wrap">
+  <div class="akuma">AKUMA</div>
+  <div class="joki">JOKI</div>
+</div>
+
+<p>Jasa joki aman dan terpercaya</p>
+
+<button onclick="openMenu()">Pilih Game</button>
+
+</div>
+
+<div id="menu">
+
+<button onclick="backLobby()">⬅ Lobby</button>
+
+<div class="stats">
+  <div class="card"><b>Order</b><br>0</div>
+  <div class="card"><b>Keberhasilan</b><br>98%</div>
+</div>
+
+<div class="menu">
+  <div class="tab active" onclick="openTab('blox', this)">Blox Fruits</div>
+  <div class="tab" onclick="openTab('exp', this)">Expedition Antarctica</div>
+  <div class="tab" onclick="openTab('retail', this)">Retail Tycoon 2</div>
+</div>
+
+<!-- BLOX -->
+<div id="blox" class="box show">
+
+<h3>LEVELING</h3>
+
+<div class="item" onclick="order('100 Level','2K')"><span>100 Level</span><span>2K</span></div>
+<div class="item" onclick="order('200 Level','4K')"><span>200 Level</span><span>4K</span></div>
+<div class="item" onclick="order('300 Level','6K')"><span>300 Level</span><span>6K</span></div>
+
+<h3>RAID</h3>
+
+<div class="item" onclick="order('Raid 1-10','10K')"><span>Raid 1-10</span><span>10K</span></div>
+<div class="item" onclick="order('Raid Full Skill','10K')"><span>Raid Full Skill</span><span>10K</span></div>
+
+<h3>SENJATA</h3>
+
+<div class="item" onclick="order('CDK','20K')"><span>CDK</span><span>20K</span></div>
+<div class="item" onclick="order('SG','10K')"><span>SG</span><span>10K</span></div>
+<div class="item" onclick="order('SH','10K')"><span>SH</span><span>10K</span></div>
+<div class="item" onclick="order('GH','15K')"><span>GH</span><span>15K</span></div>
+
+<div class="req-box">
+<p>⚠️ CDK & SG Hanya bisa dijoki in jika:</p>
+<p><b>Level 2300 - MAX</b></p>
+</div>
+
+</div>
+
+<!-- EXPEDITION -->
+<div id="exp" class="box">
+
+<div class="item" onclick="order('Muncak 1-10','15K')"><span>Muncak 1-10</span><span>15K</span></div>
+<div class="item" onclick="order('Muncak 1-25','30K')"><span>Muncak 1-25</span><span>30K</span></div>
+
+<div class="item" onclick="order('Selesai semua misi NPC (dibawah base awal)','25K')">
+<span>Selesai semua misi NPC (dibawah base awal)</span>
+<span>25K</span>
+</div>
+
+</div>
+
+<!-- RETAIL -->
+<div id="retail" class="box">
+
+<div class="item" onclick="order('Benerin Toko','2K')"><span>Benerin toko</span><span>2K</span></div>
+<div class="item" onclick="order('Pro Retail','5K')"><span>Main sampai pro</span><span>5K</span></div>
+
+</div>
+
+</div>
+
+</body>
+</html>
